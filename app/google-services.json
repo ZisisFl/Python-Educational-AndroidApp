@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "252761048005",
+    "firebase_url": "https://tame-the-python.firebaseio.com",
+    "project_id": "tame-the-python",
+    "storage_bucket": "tame-the-python.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252761048005:android:2966bcbb1a5df6e6",
+        "android_client_info": {
+          "package_name": "logismikou.texnologia.tamethepython"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252761048005-fj8u4n0p4dif5r1sadu98m0bljbb86vt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFRlXCbOHa0LDPoIm3h1rsZOhAEJuCogY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252761048005-fj8u4n0p4dif5r1sadu98m0bljbb86vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
