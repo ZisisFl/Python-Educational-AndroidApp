@@ -19,24 +19,102 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/goto_edit_acc"
+                <TextView
+                    android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="56dp"
-                    android:text="Edit Account"
+                    android:layout_marginTop="25dp"
+                    android:text="Total score"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+                <TextView
+                    android:id="@+id/practice_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="0/100 to Unlock"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="@+id/practice_badge"
+                    app:layout_constraintStart_toStartOf="@+id/practice_badge"
+                    app:layout_constraintTop_toBottomOf="@+id/practice_badge" />
+
+                <TextView
+                    android:id="@+id/total_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="0 Points"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView19"
+                    app:layout_constraintStart_toStartOf="@+id/textView19"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                <TextView
+                    android:id="@+id/community_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="0/100 to Unlock"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="@+id/community_badge"
+                    app:layout_constraintStart_toStartOf="@+id/community_badge"
+                    app:layout_constraintTop_toBottomOf="@+id/community_badge" />
+
+                <ImageView
+                    android:id="@+id/community_badge"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/shield_locked"
+                    app:layout_constraintEnd_toStartOf="@+id/textView19"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+                <ImageView
+                    android:id="@+id/practice_badge"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/medal_locked"
+                    app:layout_constraintStart_toEndOf="@+id/textView19"
+                    app:layout_constraintTop_toTopOf="@+id/community_badge" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Achievements"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="@+id/total_score_text"
+                    app:layout_constraintStart_toStartOf="@+id/total_score_text"
+                    app:layout_constraintTop_toBottomOf="@+id/total_score_text" />
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/constraintLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/goto_edit_acc"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:background="@drawable/ic_settings"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/display_name"
@@ -47,7 +125,7 @@
                         android:layout_marginTop="16dp"
                         android:text="TextView"
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="18sp"
+                        android:textSize="24sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,12 +133,58 @@
                         android:id="@+id/display_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="21dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
                         android:text="TextView"
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                        app:layout_constraintStart_toEndOf="@+id/textView17"
+                        app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="Email:"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView80"
+                        app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+                    <TextView
+                        android:id="@+id/user_since"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="TextView"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView80"
+                        app:layout_constraintStart_toEndOf="@+id/textView80"
+                        app:layout_constraintTop_toTopOf="@+id/textView80" />
+
+                    <TextView
+                        android:id="@+id/textView80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="User since:"
+                        android:textColor="@color/colorPrimary"
                         app:layout_constraintStart_toStartOf="@+id/display_name"
                         app:layout_constraintTop_toBottomOf="@+id/display_name" />
+
                 </android.support.constraint.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/info2"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

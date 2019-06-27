@@ -1,1 +1,0 @@
-Python Educational App

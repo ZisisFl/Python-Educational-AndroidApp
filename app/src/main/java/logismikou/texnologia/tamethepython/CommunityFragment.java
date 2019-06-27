@@ -1,6 +1,8 @@
 package logismikou.texnologia.tamethepython;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -31,6 +33,7 @@ public class CommunityFragment extends Fragment {
 
 
     Button create_thread_btn;
+    ImageView info3;
 
     FirebaseAuth firebaseAuth;
 
@@ -51,6 +54,8 @@ public class CommunityFragment extends Fragment {
         create_thread_btn = v.findViewById(R.id.create_thread_btn);
         thread_list = v.findViewById(R.id.thread_list);
 
+        info3 = v.findViewById(R.id.info3);
+
 
         create_thread_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +66,26 @@ public class CommunityFragment extends Fragment {
         });
 
         init_recycle_view();
+
+        info3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                alertDialog.setTitle("Community");
+                alertDialog.setMessage("We believe that achieving knowledge is easier and " +
+                        "more fun when is shared with others. We created this online thread posting " +
+                        "where you can discuss over python topics that concern you with people in the " +
+                        "same situation as you. You can find answers you seek from others threads, " +
+                        "you can post a comment to ask something or solve someones problem.");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
 
         return v;
     }

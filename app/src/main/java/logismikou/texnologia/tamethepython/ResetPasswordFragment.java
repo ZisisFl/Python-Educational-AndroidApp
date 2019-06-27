@@ -1,7 +1,6 @@
 package logismikou.texnologia.tamethepython;
 
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;

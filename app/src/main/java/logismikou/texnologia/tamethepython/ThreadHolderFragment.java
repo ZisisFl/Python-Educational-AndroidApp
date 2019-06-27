@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +41,11 @@ public class ThreadHolderFragment extends Fragment {
     LinearLayout linear_layout_comments;
 
     FirebaseAuth firebaseAuth;
-    DatabaseReference thread, comment_ref;
+    DatabaseReference thread, comment_ref, user_data;
+
+    boolean comments_loaded = false;
+
+    long community_score;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +54,7 @@ public class ThreadHolderFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_thread_holder, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        user_data = FirebaseDatabase.getInstance().getReference();
 
         close9 = v.findViewById(R.id.close9);
 
@@ -73,22 +77,26 @@ public class ThreadHolderFragment extends Fragment {
             }
         });
 
-        open_thread();
+        Bundle arguments = getArguments();
+        final String thread_reference = arguments.getString("1234");
+
+        open_thread(thread_reference);
+        load_messages(thread_reference);
 
         comment_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                post_comment();
+                post_comment(thread_reference);
             }
         });
 
+        load_points();
 
         return v;
     }
 
-    public void open_thread(){
-        Bundle arguments = getArguments();
-        String thread_reference = arguments.getString("1234");
+    private void open_thread(String thread_reference){
+
         thread = FirebaseDatabase.getInstance().getReference().child("Community").child(thread_reference);
 
         ValueEventListener get_itemListener = new ValueEventListener() {
@@ -114,27 +122,89 @@ public class ThreadHolderFragment extends Fragment {
         thread.addValueEventListener(get_itemListener);
     }
 
-    public void post_comment(){
-        Bundle arguments = getArguments();
-        String thread_reference = arguments.getString("1234");
+    private void load_messages(String thread_reference){
+        comment_ref = FirebaseDatabase.getInstance().getReference().child("Community")
+                .child(thread_reference).child("Comments");
+
+        comment_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //get old messages under branch messages if isn't empty
+                if(dataSnapshot.getChildrenCount() > 0 && !comments_loaded){
+                    comments_loaded = true;  // change value to not happen again
+                    //loop through messages in database and create textviews with create_message()
+                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        String comment = dataSnapshot1.getValue().toString();
+                        create_message(comment);
+                    }
+                }
+            // get every new message, loop through all messages and get the last one
+                else if(dataSnapshot.getChildrenCount() > 0 && comments_loaded){
+                String comment = null;
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    comment = dataSnapshot1.getValue().toString();
+                }
+                create_message(comment);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void post_comment(String thread_reference){
         comment_ref = FirebaseDatabase.getInstance().getReference().child("Community")
                 .child(thread_reference).child("Comments");
 
         String comment = comment_text.getText().toString();
         String poster = firebaseAuth.getCurrentUser().getDisplayName();
 
-        comment_ref.child(poster).setValue(comment);
-        comment_text.setText("");
+        String id = comment_ref.push().getKey();
 
-        create_message(comment, poster);
+        if (!comment.equals("")){
+            comment_ref.child(id).setValue(poster+": "+comment);
+            comment_text.setText("");
+
+            long extra_points = 5;
+            long new_practice_score = community_score + extra_points;
+            user_data.child("Community score").setValue(new_practice_score);
+        }
+        else
+            Toast.makeText(getActivity(),"Empty comment field",Toast.LENGTH_SHORT).show();
+
+        //create_message(comment, poster);
     }
 
-    public void create_message(String comment, String poster){
+    private void create_message(String comment){
         TextView show_message = new TextView(getContext());
         show_message.setTextSize(16);
         //show_message.setPadding(30,0,30,0);
-        show_message.setText(poster+": " + comment);
+        show_message.setText(comment);
         show_message.setTextColor(Color.BLACK);
         linear_layout_comments.addView(show_message);
+    }
+
+    private void load_points() {
+        if (firebaseAuth.getCurrentUser() != null) {
+            String user_id = firebaseAuth.getUid();
+            user_data = user_data.child("Users").child(user_id);
+
+            ValueEventListener get_itemListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    community_score = Integer.parseInt(dataSnapshot.child("Community score").getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                }
+            };
+            user_data.addValueEventListener(get_itemListener);
+        }
     }
 }

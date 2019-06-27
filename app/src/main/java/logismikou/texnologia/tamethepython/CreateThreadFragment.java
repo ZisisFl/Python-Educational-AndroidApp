@@ -19,11 +19,16 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 public class CreateThreadFragment extends Fragment {
@@ -38,7 +43,9 @@ public class CreateThreadFragment extends Fragment {
     Button post_btn;
 
     FirebaseAuth firebaseAuth;
-    DatabaseReference mDatabase;
+    DatabaseReference mDatabase, user_data;
+
+    long community_score;
 
     ProgressDialog progressDialog;
 
@@ -50,6 +57,7 @@ public class CreateThreadFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        user_data = FirebaseDatabase.getInstance().getReference();
 
         progressDialog = new ProgressDialog(getActivity());
 
@@ -74,6 +82,8 @@ public class CreateThreadFragment extends Fragment {
                 post_thread();
             }
         });
+
+        load_points();
 
         return v;
     }
@@ -121,6 +131,10 @@ public class CreateThreadFragment extends Fragment {
                             // return back
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,
                                     new CommunityFragment()).commit();
+
+                            long extra_points = 10;
+                            long new_practice_score = community_score + extra_points;
+                            user_data.child("Community score").setValue(new_practice_score);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -130,6 +144,27 @@ public class CreateThreadFragment extends Fragment {
                             Toast.makeText(getActivity(),"An error occurred",Toast.LENGTH_SHORT).show();
                        }
                     });
+        }
+    }
+
+    private void load_points() {
+        if (firebaseAuth.getCurrentUser() != null) {
+            String user_id = firebaseAuth.getUid();
+            user_data = user_data.child("Users").child(user_id);
+
+            ValueEventListener get_itemListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    community_score = Integer.parseInt(dataSnapshot.child("Community score").getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                }
+            };
+            user_data.addValueEventListener(get_itemListener);
         }
     }
 }

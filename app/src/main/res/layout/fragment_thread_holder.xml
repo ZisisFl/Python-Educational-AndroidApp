@@ -26,6 +26,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
                     android:text="TextView"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="24sp"
@@ -48,6 +50,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
                     android:text="TextView"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="18sp"
@@ -56,14 +60,30 @@
                     app:layout_constraintTop_toBottomOf="@+id/date" />
 
                 <TextView
-                    android:id="@+id/description"
+                    android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="TextView"
+                    android:layout_marginTop="20dp"
+                    android:text="Question:"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="@+id/keywords"
                     app:layout_constraintTop_toBottomOf="@+id/keywords" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#d9d9db"
+                    android:text="TextView"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <ImageView
                     android:id="@+id/close9"
@@ -125,10 +145,22 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
+                    android:background="#b6b7ba"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description"></LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/description">
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#efefef"
+                        android:text="Comments Section"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

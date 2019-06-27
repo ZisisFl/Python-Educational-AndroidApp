@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 extra_intro.setVisibility(View.VISIBLE);
                 read_less.setVisibility(View.VISIBLE);
+                read_more.setVisibility(View.GONE);
             }
         });
 
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 extra_intro.setVisibility(View.GONE);
                 read_less.setVisibility(View.GONE);
+                read_more.setVisibility(View.VISIBLE);
             }
         });
 

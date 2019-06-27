@@ -43,5 +43,6 @@ public class MainApp extends AppCompatActivity {
         setContentView(R.layout.activity_main_app);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navView.setSelectedItemId(R.id.navigation_home);
     }
 }

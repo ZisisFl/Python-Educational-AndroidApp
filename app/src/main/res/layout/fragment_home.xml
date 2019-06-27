@@ -48,6 +48,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="60dp"
                 android:background="@color/common_google_signin_btn_text_dark_focused"
                 android:text="Read less"
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed" />

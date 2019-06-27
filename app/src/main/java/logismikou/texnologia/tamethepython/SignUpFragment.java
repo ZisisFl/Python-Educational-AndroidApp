@@ -3,15 +3,17 @@ package logismikou.texnologia.tamethepython;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +43,7 @@ public class SignUpFragment extends Fragment {
 
 
     FirebaseAuth firebaseAuth;
+    DatabaseReference user_data;
 
     ProgressDialog progressDialog;
 
@@ -47,6 +54,7 @@ public class SignUpFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        user_data = FirebaseDatabase.getInstance().getReference();
 
         progressDialog = new ProgressDialog(getActivity());
 
@@ -62,6 +70,7 @@ public class SignUpFragment extends Fragment {
 
         verify_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
+            @RequiresApi(api = Build.VERSION_CODES.N)
             public void onClick(View view) {
                 register_user();
             }
@@ -78,6 +87,7 @@ public class SignUpFragment extends Fragment {
         return v;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void register_user(){
         String email = email_sign_up.getText().toString();
         String password = password_sign_up.getText().toString();
@@ -143,6 +153,7 @@ public class SignUpFragment extends Fragment {
                                         // intent to app's main body
                                         Intent intent = new Intent(getActivity(), MainApp.class);
                                         startActivity(intent);
+                                        post_user_data();
                                     }
                                     else{
                                         // check if there is already an account on this email
@@ -165,4 +176,18 @@ public class SignUpFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void post_user_data(){
+        // get current time
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        String user_since = df.format(currentTime);
+
+        if(firebaseAuth.getCurrentUser() != null){
+            String userId = firebaseAuth.getUid();
+            user_data.child("Users").child(userId).child("User since").setValue(user_since);
+            user_data.child("Users").child(userId).child("Community score").setValue(0);
+            user_data.child("Users").child(userId).child("Practice score").setValue(0);
+        }
+    }
 }
