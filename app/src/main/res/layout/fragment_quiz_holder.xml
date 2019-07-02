@@ -53,9 +53,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="38dp"
+                    android:layout_marginBottom="60dp"
                     android:background="@color/colorPrimary"
                     android:text="Go Back to Practice"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/review_msg" />

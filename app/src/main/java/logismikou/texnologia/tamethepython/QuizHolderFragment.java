@@ -132,7 +132,7 @@ public class QuizHolderFragment extends Fragment {
 
                             //0-10 - 4/10
                             if (count < 5){
-                                finished_msg.setText("You didn't not pass the quiz. " +
+                                finished_msg.setText("You didn't pass the quiz. " +
                                         "Do not give up you were almost there keep " +
                                         "studying and come back to retry");
                                 String joined = TextUtils.join(", ", wrong_answers_cat);

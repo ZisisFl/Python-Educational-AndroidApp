@@ -122,7 +122,7 @@ public class PracticeFragment extends Fragment {
                         "which contain some sub chapters in order to make studying easier for you." +
                         "\n\nBecause this app is intended for people with different programming " +
                         "backgrounds you can choose any chapter you like to read or quiz to exercise " +
-                        "without limitations. \n\nBased on your answers in our quizzes we will provide" +
+                        "without limitations. \n\nBased on your answers in our quizzes we will provide " +
                         "information to you in order to overcome difficulties you may face.");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {

@@ -81,7 +81,8 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                 alertDialog.setTitle("Profile");
-                alertDialog.setMessage("Here you can check your personal information and edit them.\n\n" +
+                alertDialog.setMessage("Here you can check your personal information and edit them." +
+                        "Clicking on the cogwheel image on the top of the screen\n\n" +
                         "We have created a rewarding system in order to keep track of your progress. " +
                         "The overall score is split in two areas. You earn points either from getting " +
                         "right answers in our quizzes or from you interaction with our community " +

@@ -137,9 +137,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="35dp"
                     android:layout_marginRight="35dp"
+                    android:layout_marginBottom="60dp"
                     android:background="@color/colorPrimary"
                     android:text="Quiz 4"
                     android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/theory4" />
 

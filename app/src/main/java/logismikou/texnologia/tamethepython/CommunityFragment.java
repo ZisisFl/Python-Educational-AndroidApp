@@ -76,7 +76,10 @@ public class CommunityFragment extends Fragment {
                         "more fun when is shared with others. We created this online thread posting " +
                         "where you can discuss over python topics that concern you with people in the " +
                         "same situation as you. You can find answers you seek from others threads, " +
-                        "you can post a comment to ask something or solve someones problem.");
+                        "you can post a comment to ask something or solve someones problem.\n\n" +
+                        "Click CREATE A THREAD fragment fill the form with the required fields and post" +
+                        " your questions.\n\n" +
+                        "Click an item from the list to read someone's thread.");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

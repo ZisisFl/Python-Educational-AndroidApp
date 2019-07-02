@@ -49,8 +49,14 @@ public class ResetPasswordFragment extends Fragment {
         close_reset_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,
-                        new SignInFragment()).commit();
+                if(firebaseAuth.getCurrentUser() != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                            new EditProfileFragment()).commit();
+                }
+                else{
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_layout,
+                            new SignInFragment()).commit();
+                }
             }
         });
 
